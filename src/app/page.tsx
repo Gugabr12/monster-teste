@@ -6,6 +6,7 @@ import { SiteNav } from "@/components/site-nav";
 import { ActivityCarousel } from "@/components/activity-carousel";
 import { AthleteCarousel } from "@/components/athlete-carousel";
 import { HeroSlider } from "@/components/hero-slider";
+import { Reveal } from "@/components/reveal";
 import {
   ACTIVITIES,
   ATHLETES,
@@ -117,25 +118,32 @@ function SectionHeading({
 function ProductsSection() {
   return (
     <section id="produtos" className="mx-auto w-full max-w-[1180px] px-6 py-20">
-      <SectionHeading
-        title={
-          <>
-            Encontre a
-            <br />
-            <span className="font-black italic text-[#b1e15a]">
-              sua Monster.
-            </span>
-          </>
-        }
-        action="[VER TODOS]"
-        actionHref="/bebidas"
-      />
+      <Reveal>
+        <SectionHeading
+          title={
+            <>
+              Encontre a
+              <br />
+              <span className="font-black italic text-[#b1e15a]">
+                sua Monster.
+              </span>
+            </>
+          }
+          action="[VER TODOS]"
+          actionHref="/bebidas"
+        />
+      </Reveal>
 
-      <div className="mt-14 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4">
+      {/* the cards come in one after another, left to right */}
+      <Reveal
+        stagger
+        y={40}
+        className="mt-14 grid grid-cols-2 gap-4 sm:gap-6 lg:grid-cols-4"
+      >
         {PRODUCTS.map((product) => (
           <ProductCard key={product.name} {...product} />
         ))}
-      </div>
+      </Reveal>
     </section>
   );
 }
