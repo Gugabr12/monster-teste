@@ -46,13 +46,18 @@ export function Reveal({ children, stagger, y = 28, className }: RevealProps) {
 
           const tween = gsap.from(targets, {
             autoAlpha: 0,
-            y: reduce ? 0 : y,
-            duration: reduce ? 0.35 : 0.85,
-            ease: "power2.out",
-            stagger: stagger ? (reduce ? 0.04 : 0.09) : 0,
+            // Reduced motion gets a shorter, gentler move rather than none:
+            // zeroing it left only a fade that read as no animation at all.
+            y: reduce ? Math.round(y * 0.45) : y,
+            duration: reduce ? 0.55 : 0.9,
+            ease: "power3.out",
+            stagger: stagger ? (reduce ? 0.07 : 0.12) : 0,
             scrollTrigger: {
+              // The second fold starts 700px down, so on a tall screen it is
+              // already on-screen at load. Trigger low enough that the reveal
+              // is something you scroll into, not something you miss.
               trigger: el,
-              start: "top 88%",
+              start: "top 78%",
               once: true,
             },
           });
