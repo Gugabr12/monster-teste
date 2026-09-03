@@ -43,7 +43,7 @@ export function HeroSlider({
           sizes="100vw"
           aria-hidden={i !== index}
           className={
-            "object-cover object-[62%_center] transition-opacity duration-[1200ms] ease-in-out motion-reduce:transition-none " +
+            "object-cover object-center transition-opacity duration-[1200ms] ease-in-out motion-reduce:transition-none " +
             (i === index ? "opacity-100" : "opacity-0")
           }
         />

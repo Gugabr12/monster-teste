@@ -43,7 +43,9 @@ export function ActivityCarousel({ items }: { items: Activity[] }) {
                 alt={activity.alt}
                 fill
                 draggable={false}
-                sizes="360px"
+                // cover crops a landscape photo into a portrait card, so the source has to
+                // be ~2.9x the card width to stay sharp
+                sizes="(min-width: 1024px) 1040px, (min-width: 640px) 925px, 775px"
                 className="object-cover"
               />
               <div className="activity-overlay absolute inset-0 bg-gradient-to-b from-transparent from-[42%] via-black/75 via-[74%] to-black" />

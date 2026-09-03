@@ -80,7 +80,7 @@ export function AthleteCarousel({ items }: { items: Athlete[] }) {
                   alt={athlete.name}
                   fill
                   draggable={false}
-                  sizes="276px"
+                  sizes="(min-width: 1024px) 360px, (min-width: 640px) 325px, 285px"
                   className="athlete-photo object-cover object-top"
                 />
               </div>

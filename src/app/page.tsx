@@ -33,14 +33,15 @@ function Hero() {
   return (
     <section className="relative isolate min-h-[700px] w-full overflow-hidden">
       <HeroSlider slides={HERO_SLIDES} />
-      {/* dark vignette blending into the page background */}
+      {/* Dark vignette: blends the photo into the page and keeps the copy
+          legible over bright slides like the X Games shot. */}
       <div
         aria-hidden
         className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0c1003] via-[#0c1003]/40 to-transparent"
       />
       <div
         aria-hidden
-        className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#0c1003] via-[#0c1003]/40 to-transparent"
+        className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#0c1003] via-[#0c1003]/75 via-35% to-transparent"
       />
       <div
         aria-hidden
