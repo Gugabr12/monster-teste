@@ -52,7 +52,7 @@ export function HeroSlider({
       <div
         role="tablist"
         aria-label="Destaques"
-        className="absolute bottom-[43px] left-1/2 z-20 flex w-full max-w-[1180px] -translate-x-1/2 gap-2 px-6"
+        className="absolute bottom-[33px] left-1/2 z-20 flex -translate-x-1/2 gap-[10px]"
       >
         {slides.map((slide, i) => (
           <button
@@ -66,10 +66,8 @@ export function HeroSlider({
           >
             <span
               className={
-                "block h-[10px] rounded-full transition-all duration-300 " +
-                (i === index
-                  ? "w-[26px] bg-white"
-                  : "w-[10px] bg-white/40 group-hover:bg-white/70")
+                "block size-[10px] rounded-full transition-colors duration-300 " +
+                (i === index ? "bg-white" : "bg-white/40 group-hover:bg-white/70")
               }
             />
           </button>
