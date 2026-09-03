@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0c1003;
+  --foreground: #ffffff;
+  --muted: #b6b6b6;
+  --dim: #808080;
+  --accent: #b1e15a;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-muted: var(--muted);
+  --color-dim: var(--dim);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, -apple-system,
+    "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+}
+
+/* The flavor "deck" scroll effect (GSAP ScrollTrigger, see flavor-stack.tsx).
+ * By default the panels are a normal scrolling column (works with no JS and
+ * for prefers-reduced-motion). When GSAP runs it adds `.is-pinned`: the
+ * wrapper becomes one pinned viewport and the panels stack absolutely so each
+ * one can slide up over the previous. */
+.flavor-stack-card {
+  position: relative;
+  width: 100%;
+}
+.flavor-stack-wrap.is-pinned {
+  display: block;
+  height: 100svh;
+  overflow: hidden;
+}
+.flavor-stack-wrap.is-pinned .flavor-stack-card {
+  position: absolute;
+  inset: 0;
+}
+
+/* Carousel card hover, shared by the activity and athlete carousels.
+ * A card opts in with `.card-hover`; it tunes the lift with two custom
+ * properties and adds its own reveal rules under `.card-hover:hover`.
+ * Touch / small screens get no hover state — the cards read as-is. */
+@media (min-width: 1024px) {
+  .card-hover {
+    --card-hover-scale: 1.07;
+    --card-hover-shadow: 0 30px 70px -15px rgba(0, 0, 0, 0.65);
+    transition:
+      transform 0.45s cubic-bezier(0.22, 1, 0.36, 1),
+      box-shadow 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-hover:hover {
+    transform: scale(var(--card-hover-scale));
+    z-index: 10;
+    box-shadow: var(--card-hover-shadow);
+  }
+
+  /* "Se acontece, a gente tá lá." — gradient and caption fade in just after
+   * the card starts growing. */
+  .activity-overlay {
+    opacity: 0;
+    transition: opacity 0.45s ease;
+  }
+  .activity-caption {
+    opacity: 0;
+    translate: 0 20px;
+    transition:
+      opacity 0.4s ease,
+      translate 0.45s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-hover:hover .activity-overlay {
+    opacity: 1;
+  }
+  .card-hover:hover .activity-caption {
+    opacity: 1;
+    translate: 0 0;
+    transition-delay: 0.12s;
+  }
+
+  /* The loud lift — bigger grow plus an accent rim. Shared by the athlete and
+   * product cards. Two-class selectors win over `.card-hover` regardless of
+   * source order. */
+  .athlete-card.card-hover,
+  .product-card.card-hover {
+    --card-hover-scale: 1.09;
+    --card-hover-shadow:
+      0 30px 70px -15px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(177, 225, 90, 0.9);
+  }
+
+  /* A card's label greens on hover. */
+  .card-name {
+    transition: color 0.35s ease;
+  }
+  .card-hover:hover .card-name {
+    color: #b1e15a;
+  }
+
+  /* Athlete extras: the glow swells and the cutout pushes in. */
+  .athlete-glow {
+    transition:
+      opacity 0.45s ease,
+      transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .athlete-photo {
+    transition: transform 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+  .card-hover:hover .athlete-glow {
+    transform: scale(1.18);
+  }
+  .card-hover:hover .athlete-photo {
+    transform: scale(1.05);
+  }
+}
+
+/* Covers every card and everything inside one, so a new card type never has to
+ * be added here. */
+@media (prefers-reduced-motion: reduce) {
+  .card-hover,
+  .card-hover * {
+    transition: none;
+  }
+}
