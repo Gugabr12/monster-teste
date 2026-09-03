@@ -33,30 +33,24 @@ function Hero() {
   return (
     <section className="relative isolate min-h-[700px] w-full overflow-hidden">
       <HeroSlider slides={HERO_SLIDES} />
-      {/* Dark vignette: blends the photo into the page and keeps the copy
-          legible over bright slides like the X Games shot. */}
+      {/* The artboard has no overlay at all — its hero photo is already dark at
+          the edges. Keep only a soft left scrim and a short bottom fade, enough
+          to hold the copy on the brighter slides that aren't in the artboard
+          and to blend into the page below. */}
       <div
         aria-hidden
-        className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-[#0c1003] via-[#0c1003]/40 to-transparent"
+        className="absolute inset-x-0 bottom-0 h-1/4 bg-gradient-to-t from-[#0c1003] to-transparent"
       />
       <div
         aria-hidden
-        className="absolute inset-y-0 left-0 w-3/4 bg-gradient-to-r from-[#0c1003] via-[#0c1003]/75 via-35% to-transparent"
-      />
-      <div
-        aria-hidden
-        className="pointer-events-none absolute left-[6%] top-[120px] size-[620px] max-w-[55vw] rounded-full opacity-80"
-        style={{
-          background:
-            "radial-gradient(circle, rgba(177,225,90,0.20) 0%, rgba(177,225,90,0.04) 45%, rgba(12,16,3,0) 70%)",
-        }}
+        className="absolute inset-y-0 left-0 w-1/2 bg-gradient-to-r from-[#0c1003]/85 via-[#0c1003]/35 via-45% to-transparent"
       />
 
       <SiteNav />
 
-      <div className="relative z-10 mx-auto flex min-h-[600px] w-full max-w-[1180px] flex-col justify-end px-6 pb-[110px] sm:min-h-[700px] sm:justify-center sm:pb-0">
-        <div className="flex max-w-[450px] flex-col gap-4">
-          <h1 className="text-[40px] font-extrabold uppercase leading-[1.1] tracking-tight sm:text-[52px] lg:text-[60px] lg:leading-[1.2]">
+      <div className="relative z-10 mx-auto flex min-h-[600px] w-full max-w-[1180px] flex-col justify-end px-6 pb-[110px] sm:min-h-[700px] sm:pb-[88px]">
+        <div className="flex max-w-[450px] flex-col items-start gap-4">
+          <h1 className="text-[40px] font-extrabold uppercase leading-[1.1] tracking-tight sm:text-[52px] lg:w-[462px] lg:text-[64px] lg:leading-[1.3]">
             <span className="font-black italic text-[#b1e15a]">Energia</span>{" "}
             para o seu mundo
           </h1>
@@ -64,15 +58,29 @@ function Hero() {
             <p className="w-[186px] text-[16px] leading-[1.5] text-[#b6b6b6]">
               Monster é energia para quem vive no máximo.
             </p>
+            {/* The glow lives on the wrapper as a filter, not a box-shadow on the
+                clipped shape: clip-path would discard the shadow along with
+                everything else it cuts. drop-shadow follows the silhouette. */}
             <a
               href="#produtos"
-              className="relative inline-flex h-[53px] w-[230px] items-center justify-center bg-[#b1e15a] text-[13px] font-bold uppercase tracking-wide text-[#0c1003] shadow-[0_-10px_125px_0_rgba(177,225,90,0.32),0_4px_4px_0_rgba(0,0,0,0.25)] transition-transform hover:-translate-y-0.5"
+              className="relative inline-flex h-[53px] w-[230px] shrink-0 transition-transform hover:-translate-y-0.5"
               style={{
-                clipPath:
-                  "polygon(6% 0, 100% 0, 94% 100%, 0% 100%)",
+                filter: [
+                  "drop-shadow(0 -10px 125.833px rgba(177,225,90,0.32))",
+                  "drop-shadow(0 -3.65px 45.931px rgba(177,225,90,0.22))",
+                  "drop-shadow(0 -1.772px 22.299px rgba(177,225,90,0.18))",
+                  "drop-shadow(0 -0.869px 10.931px rgba(177,225,90,0.14))",
+                  "drop-shadow(0 -0.343px 4.322px rgba(177,225,90,0.1))",
+                  "drop-shadow(0 4px 4px rgba(0,0,0,0.25))",
+                ].join(" "),
               }}
             >
-              Compra Online
+              <span
+                className="flex size-full items-center justify-center bg-[#b1e15a] text-[13.333px] font-bold uppercase tracking-wide text-[#0c1003]"
+                style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0% 100%)" }}
+              >
+                Compra Online
+              </span>
             </a>
           </div>
         </div>
