@@ -14,9 +14,10 @@ import canUltraMango from "../../../public/assets/bebidas/ultra/can-mango.png";
 import canUltraMango2 from "../../../public/assets/bebidas/ultra/can-mango-2.png";
 
 export type Flavor = {
+  /** Product name — brand, so it is not translated. */
   title: string;
-  taste: string;
-  description: string;
+  /** Looks up taste + description in content/dictionary.ts. */
+  key: string;
   can: StaticImageData;
   /**
    * Torn-paper backdrop. Two separate artboards, not one file resized:
@@ -55,9 +56,7 @@ export const CATEGORIES: Category[] = [
     flavors: [
       {
         title: "Monster Energy Original Green",
-        taste: "Sabor de Monster é ao mesmo tempo marcante e suave.",
-        description:
-          "Surpreenda-se com a lata do energético mais animal do planeta. Com duas vezes mais energia do que uma bebida energética regular, Monster possui uma presença marcante e um sabor único, inconfundível.",
+        key: "energy-original",
         can: canGreen,
         torn: {
           wide: "/assets/bebidas/torn-green.svg",
@@ -66,9 +65,7 @@ export const CATEGORIES: Category[] = [
       },
       {
         title: "Monster Energy Absolutely Zero",
-        taste: "Toda a força da Monster, agora sem açúcar e sem calorias.",
-        description:
-          "A mesma explosão de energia da Monster original, com zero açúcar. Refrescante, encorpada e com aquele sabor cítrico que refresca a cada gole — para quem quer performance sem abrir mão de nada.",
+        key: "energy-zero",
         can: canBlue,
         torn: {
           wide: "/assets/bebidas/torn-blue.svg",
@@ -77,9 +74,7 @@ export const CATEGORIES: Category[] = [
       },
       {
         title: "Monster Energy Ultra Paradise",
-        taste: "Cítrica e refrescante, com kiwi, limão e um toque de cactos.",
-        description:
-          "Leve, seca e sem açúcar. A Ultra Paradise entrega a energia da Monster com um sabor tropical e crocante — perfeita pra quem quer refrescância sem peso.",
+        key: "energy-paradise",
         can: canGreen,
         torn: {
           wide: "/assets/bebidas/torn-lime.svg",
@@ -96,9 +91,7 @@ export const CATEGORIES: Category[] = [
     flavors: [
       {
         title: "Monster Energy Ultra White",
-        taste: "Sabor cítrico. Sem açúcar!",
-        description:
-          "Mais refrescante. Mais leve. Monster Energy Zero Ultra é zero açúcar e uma carga completa de nossa mistura de energia Monster.",
+        key: "ultra-white",
         can: canUltraWhite,
         torn: {
           wide: "/assets/bebidas/ultra/torn-white.svg",
@@ -109,9 +102,7 @@ export const CATEGORIES: Category[] = [
       },
       {
         title: "Monster Energy Ultra Violet",
-        taste: "Sabor de Monster é ao mesmo tempo marcante e suave.",
-        description:
-          "Surpreenda-se com a lata do energético mais animal do planeta. Com duas vezes mais energia do que uma bebida energética regular. Monster possui uma presença marcante e um sabor único! Inconfundível.",
+        key: "ultra-violet",
         can: canUltraViolet,
         torn: {
           wide: "/assets/bebidas/ultra/torn-violet.svg",
@@ -122,9 +113,7 @@ export const CATEGORIES: Category[] = [
       },
       {
         title: "Monster Energy Ultra Watermelon",
-        taste: "Melancia refrescante",
-        description:
-          "Sob o céu noturno iluminado por fogos de artifício, você tem sua paixão ao seu lado. Com boa música e melhores amigos, é o melhor verão de todos os tempos. Ultra Watermelon é verão em lata, para que você possa apreciá-lo a qualquer hora. Sem açúcar, sabor refrescante, com a mistura explosiva de energia Monster para iluminar as noites quentes de verão.",
+        key: "ultra-watermelon",
         can: canUltraWatermelon,
         torn: {
           wide: "/assets/bebidas/ultra/torn-watermelon.svg",
@@ -135,10 +124,8 @@ export const CATEGORIES: Category[] = [
       },
       {
         title: "Monster Energy Ultra Peachy Keen",
-        taste: "Sabor pêssego com o blend secreto Monster Energy",
+        key: "ultra-peachy",
         // TODO: the artboard still carries the Watermelon copy here.
-        description:
-          "Sob o céu noturno iluminado por fogos de artifício, você tem sua paixão ao seu lado. Com boa música e melhores amigos, é o melhor verão de todos os tempos. Ultra Watermelon é verão em lata, para que você possa apreciá-lo a qualquer hora. Sem açúcar, sabor refrescante, com a mistura explosiva de energia Monster para iluminar as noites quentes de verão.",
         can: canUltraPeachy,
         torn: {
           wide: "/assets/bebidas/ultra/torn-peachy.svg",
@@ -149,10 +136,8 @@ export const CATEGORIES: Category[] = [
       },
       {
         title: "Monster Ultra Fiesta Mango",
-        taste: "Sabor tropical de manga",
+        key: "ultra-mango",
         // TODO: the artboard still carries the Watermelon copy here.
-        description:
-          "Sob o céu noturno iluminado por fogos de artifício, você tem sua paixão ao seu lado. Com boa música e melhores amigos, é o melhor verão de todos os tempos. Ultra Watermelon é verão em lata, para que você possa apreciá-lo a qualquer hora. Sem açúcar, sabor refrescante, com a mistura explosiva de energia Monster para iluminar as noites quentes de verão.",
         can: canUltraMango,
         torn: {
           wide: "/assets/bebidas/ultra/torn-mango.svg",
@@ -165,10 +150,8 @@ export const CATEGORIES: Category[] = [
         // The artboard repeats the Fiesta Mango name on this sixth panel even
         // though its colour and can are their own — it just wasn't renamed.
         title: "Monster Ultra Fiesta Mango",
-        taste: "Sabor tropical de manga",
+        key: "ultra-mango-2",
         // TODO: the artboard still carries the Watermelon copy here.
-        description:
-          "Sob o céu noturno iluminado por fogos de artifício, você tem sua paixão ao seu lado. Com boa música e melhores amigos, é o melhor verão de todos os tempos. Ultra Watermelon é verão em lata, para que você possa apreciá-lo a qualquer hora. Sem açúcar, sabor refrescante, com a mistura explosiva de energia Monster para iluminar as noites quentes de verão.",
         can: canUltraMango2,
         torn: {
           wide: "/assets/bebidas/ultra/torn-mango-2.svg",

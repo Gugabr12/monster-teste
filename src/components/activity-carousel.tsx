@@ -8,7 +8,6 @@ export type Activity = {
   image: StaticImageData;
   category: string;
   headline: string;
-  alt: string;
 };
 
 export function ActivityCarousel({ items }: { items: Activity[] }) {
@@ -40,7 +39,8 @@ export function ActivityCarousel({ items }: { items: Activity[] }) {
             >
               <Image
                 src={activity.image}
-                alt={activity.alt}
+                // the caption below names the card, so the photo is decorative
+                alt=""
                 fill
                 draggable={false}
                 // cover crops a landscape photo into a portrait card, so the source has to

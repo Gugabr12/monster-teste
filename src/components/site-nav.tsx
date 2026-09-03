@@ -4,34 +4,29 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
+import { LOCALES, useLocale } from "@/lib/i18n";
 import logo from "../../public/assets/logo.png";
 
 type NavLink = { label: string; href: string; active?: boolean };
 
-const DEFAULT_LINKS: NavLink[] = [
-  { label: "Bebidas", href: "/bebidas" },
-  { label: "Atletas", href: "#" },
-  { label: "Eventos", href: "#" },
-  { label: "Novidades", href: "#" },
-];
-
-const LOCALES = ["PT/BR", "EUA", "MÉXICO", "ARGENTINA", "ESPANHA", "FRANÇA", "ALEMANHA"];
-
-export function SiteNav({
-  links = DEFAULT_LINKS,
-}: {
-  links?: NavLink[];
-}) {
+export function SiteNav({ links }: { links?: NavLink[] }) {
+  const { locale, setLocale, t } = useLocale();
   const [menuOpen, setMenuOpen] = useState(false);
   const [langOpen, setLangOpen] = useState(false);
-  const [locale, setLocale] = useState(LOCALES[0]);
+
+  const navLinks: NavLink[] = links ?? [
+    { label: t.nav.bebidas, href: "/bebidas" },
+    { label: t.nav.atletas, href: "#" },
+    { label: t.nav.eventos, href: "#" },
+    { label: t.nav.novidades, href: "#" },
+  ];
 
   return (
     <nav className="absolute inset-x-0 top-6 z-30 flex justify-center">
       <div className="flex w-full max-w-[1180px] items-center justify-between gap-8 px-6 lg:justify-center lg:gap-[80px]">
         <Link
           href="/"
-          aria-label="Monster Energy — início"
+          aria-label={t.nav.home}
           className="block h-[42px] w-[32px] shrink-0 overflow-hidden"
         >
           {/* nav shows only the Monster claw, matching the Figma header */}
@@ -44,7 +39,7 @@ export function SiteNav({
         </Link>
 
         <ul className="hidden items-center gap-8 text-[16px] uppercase tracking-wide lg:flex xl:gap-12">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <li key={link.label}>
               <Link
                 href={link.href}
@@ -66,7 +61,7 @@ export function SiteNav({
           <div className="relative">
             <button
               type="button"
-              aria-label="Trocar idioma"
+              aria-label={t.nav.changeLanguage}
               aria-expanded={langOpen}
               onClick={() => {
                 setLangOpen((v) => !v);
@@ -77,7 +72,7 @@ export function SiteNav({
               {/* eslint-disable-next-line @next/next/no-img-element -- small static decorative SVG */}
               <img src="/assets/world.svg" alt="" className="size-[30px]" />
               <span className="text-[13px] font-medium uppercase tracking-wide">
-                {locale}
+                {locale.label}
               </span>
             </button>
 
@@ -91,20 +86,22 @@ export function SiteNav({
                   className="fixed inset-0 z-10 cursor-default"
                 />
                 <ul className="absolute right-0 top-[42px] z-20 flex w-[180px] flex-col gap-0.5 rounded-xl border border-white/10 bg-[#0c1003]/95 p-2 text-[13px] uppercase tracking-wide backdrop-blur">
-                  {LOCALES.map((code) => (
-                    <li key={code}>
+                  {LOCALES.map((option) => (
+                    <li key={option.id}>
                       <button
                         type="button"
                         onClick={() => {
-                          setLocale(code);
+                          setLocale(option.id);
                           setLangOpen(false);
                         }}
                         className={`flex w-full items-center justify-between rounded-lg px-3 py-2 text-left transition-colors hover:bg-white/10 ${
-                          code === locale ? "text-[#b1e15a]" : "text-white"
+                          option.id === locale.id
+                            ? "text-[#b1e15a]"
+                            : "text-white"
                         }`}
                       >
-                        {code}
-                        {code === locale && <span aria-hidden>•</span>}
+                        {option.label}
+                        {option.id === locale.id && <span aria-hidden>•</span>}
                       </button>
                     </li>
                   ))}
@@ -115,7 +112,7 @@ export function SiteNav({
 
           <button
             type="button"
-            aria-label="Abrir menu"
+            aria-label={t.nav.openMenu}
             aria-expanded={menuOpen}
             onClick={() => {
               setMenuOpen((v) => !v);
@@ -144,7 +141,7 @@ export function SiteNav({
 
       {menuOpen && (
         <ul className="absolute inset-x-0 top-[64px] mx-4 flex flex-col gap-1 rounded-2xl border border-white/10 bg-[#0c1003]/95 p-4 text-[16px] uppercase tracking-wide backdrop-blur lg:hidden">
-          {links.map((link) => (
+          {navLinks.map((link) => (
             <li key={link.label}>
               <Link
                 href={link.href}

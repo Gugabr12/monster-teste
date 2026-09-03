@@ -3,6 +3,8 @@
 import { useEffect, useState } from "react";
 import Image, { type StaticImageData } from "next/image";
 
+import { useLocale } from "@/lib/i18n";
+
 export type HeroSlide = {
   image: StaticImageData;
   alt: string;
@@ -20,6 +22,7 @@ export function HeroSlider({
   slides: HeroSlide[];
   interval?: number;
 }) {
+  const { t } = useLocale();
   const [index, setIndex] = useState(0);
 
   useEffect(() => {
@@ -51,7 +54,7 @@ export function HeroSlider({
 
       <div
         role="tablist"
-        aria-label="Destaques"
+        aria-label={t.hero.slides}
         className="absolute bottom-[33px] left-1/2 z-20 flex -translate-x-1/2 gap-[10px]"
       >
         {slides.map((slide, i) => (
@@ -60,7 +63,7 @@ export function HeroSlider({
             type="button"
             role="tab"
             aria-selected={i === index}
-            aria-label={`Ir para o destaque ${i + 1}`}
+            aria-label={t.hero.goToSlide(i + 1)}
             onClick={() => setIndex(i)}
             className="group h-[10px] py-0 outline-offset-4"
           >

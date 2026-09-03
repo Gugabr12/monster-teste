@@ -1,3 +1,5 @@
+"use client";
+
 import type { ReactNode } from "react";
 import Image from "next/image";
 import Link from "next/link";
@@ -8,14 +10,13 @@ import { AthleteCarousel } from "@/components/athlete-carousel";
 import { HeroSlider } from "@/components/hero-slider";
 import { Reveal } from "@/components/reveal";
 import {
-  ACTIVITIES,
+  ACTIVITY_IMAGES,
   ATHLETES,
-  FOOTER_COLUMNS,
   HERO_SLIDES,
-  LEGAL_LINKS,
   PRODUCTS,
   SOCIALS,
 } from "@/content/home";
+import { useLocale } from "@/lib/i18n";
 import logo from "../../public/assets/logo.png";
 
 export default function Home() {
@@ -31,6 +32,8 @@ export default function Home() {
 }
 
 function Hero() {
+  const { t } = useLocale();
+
   return (
     <section className="relative isolate min-h-[700px] w-full overflow-hidden">
       <HeroSlider slides={HERO_SLIDES} />
@@ -52,12 +55,14 @@ function Hero() {
       <div className="relative z-10 mx-auto flex min-h-[600px] w-full max-w-[1180px] flex-col justify-end px-6 pb-[110px] sm:min-h-[700px] sm:pb-[88px]">
         <div className="flex max-w-[450px] flex-col items-start gap-4">
           <h1 className="text-[40px] font-extrabold uppercase leading-[1.1] tracking-tight sm:text-[52px] lg:w-[462px] lg:text-[64px] lg:leading-[1.3]">
-            <span className="font-black italic text-[#b1e15a]">Energia</span>{" "}
-            para o seu mundo
+            <span className="font-black italic text-[#b1e15a]">
+              {t.hero.titleAccent}
+            </span>{" "}
+            {t.hero.titleRest}
           </h1>
           <div className="flex flex-wrap items-center gap-4">
             <p className="w-[186px] text-[16px] leading-[1.5] text-[#b6b6b6]">
-              Monster é energia para quem vive no máximo.
+              {t.hero.tagline}
             </p>
             {/* The glow is a filter on the wrapper, not a box-shadow on the
                 clipped shape — clip-path would discard the shadow along with
@@ -79,7 +84,7 @@ function Hero() {
                 className="flex size-full items-center justify-center bg-[#b1e15a] text-[13.333px] font-bold uppercase tracking-wide text-[#0c1003]"
                 style={{ clipPath: "polygon(6% 0, 100% 0, 94% 100%, 0% 100%)" }}
               >
-                Compra Online
+                {t.hero.cta}
               </span>
             </a>
           </div>
@@ -115,20 +120,22 @@ function SectionHeading({
 }
 
 function ProductsSection() {
+  const { t } = useLocale();
+
   return (
     <section id="produtos" className="mx-auto w-full max-w-[1180px] px-6 py-20">
       <Reveal>
         <SectionHeading
           title={
             <>
-              Encontre a
+              {t.products.line1}
               <br />
               <span className="font-black italic text-[#b1e15a]">
-                sua Monster.
+                {t.products.line2}
               </span>
             </>
           }
-          action="[VER TODOS]"
+          action={t.products.action}
           actionHref="/bebidas"
         />
       </Reveal>
@@ -179,13 +186,17 @@ function ProductCard({
 }
 
 function AthletesSection() {
+  const { t } = useLocale();
+
   return (
     <section className="mx-auto w-full max-w-[1180px] px-6 py-20">
       <SectionHeading
         title={
-          <span className="font-black italic text-[#b1e15a]">Atletas</span>
+          <span className="font-black italic text-[#b1e15a]">
+            {t.athletes.title}
+          </span>
         }
-        action="[VER TODOS]"
+        action={t.athletes.action}
       />
 
       <div className="mt-12">
@@ -196,32 +207,41 @@ function AthletesSection() {
 }
 
 function ActivitiesSection() {
+  const { t } = useLocale();
+  // photo comes from content, caption from the dictionary
+  const items = ACTIVITY_IMAGES.map((image, i) => ({
+    image,
+    ...t.activities.items[i],
+  }));
+
   return (
     <section className="mx-auto w-full max-w-[1180px] px-6 py-20">
       <SectionHeading
         title={
           <>
-            Se acontece,
+            {t.activities.line1}
             <br />
             <span className="font-black italic text-[#b1e15a]">
-              a gente tá lá.
+              {t.activities.line2}
             </span>
           </>
         }
-        action="[TODAS AS ATIVIDADES]"
+        action={t.activities.action}
       />
 
       <div className="mt-16">
-        <ActivityCarousel items={ACTIVITIES} />
+        <ActivityCarousel items={items} />
       </div>
       <p className="mt-5 text-[13px] text-[#808080]">
-        Arraste os cards para navegar entre as novidades.
+        {t.activities.dragHint}
       </p>
     </section>
   );
 }
 
 function Footer() {
+  const { t } = useLocale();
+
   return (
     <footer className="mx-auto w-full max-w-[1180px] px-6 py-16">
       <div className="flex flex-col gap-12 border-t border-white/10 pt-12 md:flex-row md:justify-between">
@@ -248,7 +268,7 @@ function Footer() {
         </div>
 
         <div className="flex gap-16">
-          {FOOTER_COLUMNS.map((column) => (
+          {t.footer.columns.map((column) => (
             <div key={column.title} className="flex flex-col gap-4">
               <p className="text-[19px] font-medium">{column.title}</p>
               <ul className="flex flex-col gap-3">
@@ -269,7 +289,7 @@ function Footer() {
       </div>
 
       <ul className="mt-12 flex flex-wrap gap-x-4 gap-y-2 text-[12px] text-[#808080]">
-        {LEGAL_LINKS.map((link) => (
+        {t.footer.legal.map((link) => (
           <li key={link}>
             <a href="#" className="transition-colors hover:text-white">
               {link}

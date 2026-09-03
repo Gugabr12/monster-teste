@@ -1,4 +1,3 @@
-import type { Activity } from "@/components/activity-carousel";
 import type { Athlete } from "@/components/athlete-carousel";
 import type { HeroSlide } from "@/components/hero-slider";
 
@@ -63,44 +62,15 @@ export const ATHLETES: Athlete[] = [
   { image: athlete1, name: "Enea Bastianini", sport: "MotoGP" },
 ];
 
-/** Three photos from the artboard, cycled so the loop always fills the row. */
-export const ACTIVITIES: Activity[] = [
-  {
-    image: actRiders,
-    category: "Ação / Atletas",
-    headline: "O elenco Monster Energy que domina cada modalidade",
-    alt: "Dois pilotos Monster Energy de costas segurando seus capacetes",
-  },
-  {
-    image: actXgames,
-    category: "Ação / Skateboard",
-    headline: "Atletas da Monster Energy conquistam medalhas de ouro",
-    alt: "Skatista na rampa vertical do X Games",
-  },
-  {
-    image: actSurf,
-    category: "Ação / Surfe",
-    headline: "Monster Energy nas ondas: os drops mais insanos do ano",
-    alt: "Surfista Monster Energy num aéreo sobre a onda",
-  },
-  {
-    image: actRiders,
-    category: "Ação / Bastidores",
-    headline: "Um dia na estrada com os atletas Monster Energy",
-    alt: "Dois pilotos Monster Energy de costas segurando seus capacetes",
-  },
-  {
-    image: actXgames,
-    category: "Ação / X Games",
-    headline: "A noite em que o vert virou show no Caesars Superdome",
-    alt: "Skatista na rampa vertical do X Games",
-  },
-  {
-    image: actSurf,
-    category: "Ação / Surfe",
-    headline: "O aéreo perfeito que fechou a etapa do campeonato",
-    alt: "Surfista Monster Energy num aéreo sobre a onda",
-  },
+/** Three photos from the artboard, cycled so the loop always fills the row.
+ *  Their captions live in content/dictionary.ts, one entry per card. */
+export const ACTIVITY_IMAGES = [
+  actRiders,
+  actXgames,
+  actSurf,
+  actRiders,
+  actXgames,
+  actSurf,
 ];
 
 export const SOCIALS = [
@@ -111,16 +81,3 @@ export const SOCIALS = [
   { label: "Threads", src: "/assets/icon-threads.svg" },
 ];
 
-export const FOOTER_COLUMNS = [
-  { title: "A empresa", links: ["Carreiras", "Sobre nós", "Monster Army"] },
-  { title: "Suporte", links: ["Perguntas Frequentes", "Entre em contato"] },
-];
-
-export const LEGAL_LINKS = [
-  "© Monster Energy Company",
-  "Todos os direitos reservados",
-  "Termos de uso",
-  "Política de privacidade",
-  "Política de cookies",
-  "Não venda minhas informações",
-];

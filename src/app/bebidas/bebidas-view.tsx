@@ -4,10 +4,12 @@ import { useRef, useState } from "react";
 import Image from "next/image";
 
 import { SiteNav } from "@/components/site-nav";
+import { useLocale } from "@/lib/i18n";
 import { CATEGORIES, getCategory } from "./flavors";
 import { FlavorStack } from "./flavor-stack";
 
 export function BebidasView() {
+  const { t } = useLocale();
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const flavorsRef = useRef<HTMLDivElement>(null);
 
@@ -27,7 +29,7 @@ export function BebidasView() {
 
         <div className="mx-auto w-full max-w-[1180px] px-6">
           <p className="mb-8 text-[13px] uppercase tracking-[0.2em] text-[#b6b6b6]">
-            Escolha uma categoria
+            {t.drinks.chooseCategory}
           </p>
           <div className="grid grid-cols-1 gap-x-8 gap-y-6 sm:grid-cols-2 lg:grid-cols-3">
             {CATEGORIES.map((category) => {
@@ -59,8 +61,7 @@ export function BebidasView() {
       <div ref={flavorsRef} className="scroll-mt-24">
         {selected === null && (
           <p className="mx-auto w-full max-w-[1180px] px-6 pb-24 text-center text-[15px] text-[#808080]">
-            Selecione uma categoria acima para ver os sabores e as informações das
-            latas.
+            {t.drinks.prompt}
           </p>
         )}
 
@@ -69,7 +70,7 @@ export function BebidasView() {
             <div className="rounded-2xl border border-white/10 bg-white/[0.02] px-8 py-16 text-center">
               <p className="text-[20px] font-bold uppercase">{selected.name}</p>
               <p className="mt-2 text-[15px] text-[#808080]">
-                Sabores desta categoria em breve.
+                {t.drinks.comingSoon}
               </p>
             </div>
           </div>

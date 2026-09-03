@@ -6,6 +6,7 @@ import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
 
+import { useLocale } from "@/lib/i18n";
 import type { Flavor } from "./flavors";
 
 gsap.registerPlugin(ScrollTrigger, useGSAP);
@@ -142,6 +143,8 @@ function FlavorPanel({
   brandAlt: string;
   index: number;
 }) {
+  const { t } = useLocale();
+  const copy = t.flavours[flavor.key as keyof typeof t.flavours];
   const light = flavor.ink === "light";
   const body = light ? "text-white" : "text-[#0c1003]";
   const bodyMuted = light ? "text-white/95" : "text-[#0c1003]/95";
@@ -200,7 +203,8 @@ function FlavorPanel({
               {flavor.title}
             </h2>
             <p className="max-w-[268px] text-[14px] leading-[1.5] lg:max-w-[402px] lg:text-[22px]">
-              <span className="font-bold">Sobre o sabor:</span> {flavor.taste}
+              <span className="font-bold">{t.drinks.aboutFlavour}</span>{" "}
+              {copy.taste}
             </p>
 
             <div className="flex flex-nowrap justify-center gap-[9px] lg:justify-start lg:gap-4">
@@ -209,7 +213,7 @@ function FlavorPanel({
                 className={`h-[30px] w-[130px] shrink-0 -skew-x-12 border-2 transition-colors ${outline} lg:h-[43px] lg:w-[187px]`}
               >
                 <span className="flex skew-x-12 items-center justify-center text-[8px] font-bold uppercase tracking-wide lg:text-[12px]">
-                  Tabela nutricional
+                  {t.drinks.nutrition}
                 </span>
               </button>
               <button
@@ -217,7 +221,7 @@ function FlavorPanel({
                 className="h-[30px] w-[130px] shrink-0 -skew-x-12 bg-white text-[#0c1003] shadow-[0_-8px_51px_rgba(255,255,255,0.32),0_3px_2px_rgba(255,255,255,0.25)] transition-transform hover:-translate-y-0.5 lg:h-[43px] lg:w-[187px]"
               >
                 <span className="flex skew-x-12 items-center justify-center text-[8px] font-bold uppercase tracking-wide lg:text-[12px]">
-                  Compra Online
+                  {t.drinks.buy}
                 </span>
               </button>
             </div>
@@ -225,7 +229,7 @@ function FlavorPanel({
             <p
               className={`max-w-[286px] text-[8px] leading-[1.5] ${bodyMuted} lg:max-w-[412px] lg:text-[12px]`}
             >
-              {flavor.description}
+              {copy.description}
             </p>
           </div>
 
