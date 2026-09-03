@@ -59,20 +59,19 @@ function Hero() {
             <p className="w-[186px] text-[16px] leading-[1.5] text-[#b6b6b6]">
               Monster é energia para quem vive no máximo.
             </p>
-            {/* The glow lives on the wrapper as a filter, not a box-shadow on the
-                clipped shape: clip-path would discard the shadow along with
-                everything else it cuts. drop-shadow follows the silhouette. */}
+            {/* The glow is a filter on the wrapper, not a box-shadow on the
+                clipped shape — clip-path would discard the shadow along with
+                everything else it cuts.
+                Two layers, not the artboard's six: chained drop-shadows
+                compound (each one casts a shadow of the previous result), so
+                stacking six turned a soft glow into a halo. */}
             <a
               href="#produtos"
               className="relative inline-flex h-[53px] w-[230px] shrink-0 transition-transform hover:-translate-y-0.5"
               style={{
                 filter: [
-                  "drop-shadow(0 -10px 125.833px rgba(177,225,90,0.32))",
-                  "drop-shadow(0 -3.65px 45.931px rgba(177,225,90,0.22))",
-                  "drop-shadow(0 -1.772px 22.299px rgba(177,225,90,0.18))",
-                  "drop-shadow(0 -0.869px 10.931px rgba(177,225,90,0.14))",
-                  "drop-shadow(0 -0.343px 4.322px rgba(177,225,90,0.1))",
-                  "drop-shadow(0 4px 4px rgba(0,0,0,0.25))",
+                  "drop-shadow(0 -6px 26px rgba(177,225,90,0.28))",
+                  "drop-shadow(0 3px 4px rgba(0,0,0,0.25))",
                 ].join(" "),
               }}
             >
